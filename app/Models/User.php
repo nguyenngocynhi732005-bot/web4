@@ -8,6 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+//Sử dụng Notification CustomResetPass
+use App\Notifications\CustomResetPass;
+
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -41,4 +45,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //Sử dụng Notification CustomResetPass để thay đổi nội dung email Reset Password
+    public function sendPasswordResetNotification($token)
+{
+        $this->notify(new CustomResetPass($token));
+    }
+
 }
