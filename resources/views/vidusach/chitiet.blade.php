@@ -1,29 +1,50 @@
 <x-book-layout>
-    
     <x-slot name="title">
         Chi tiết: {{ $sach->tieu_de }}
     </x-slot>
+    <div class="container-fluid bg-white p-3 shadow-sm rounded">
+    <h3 class="mb-3 text-dark" style="font-weight: 500;">{{ $sach->tieu_de }}</h3>
 
-<div class="row">
-    
-    <div class="col-12">
-<h4><p style="text-align: center">{{ $sach->tieu_de }}</p></h4>
-    </div>
-    <div class="col-4" style="padding: 0 20px;">
-        <img src="{{ $sach->link_anh_bia }}" width="100%" alt="{{ $sach->tieu_de }}">
+    <div class="row">
+        <div class="col-md-5">
+            @php
+                // Logic xử lý tên file ảnh giống như bạn đã làm ở trang danh sách
+                $ten_file = str_replace('image/', 'image/sach_', $sach->file_anh_bia);
+            @endphp
+        </div>
+        <div class="col-md-7">
+            <div class="info-detail" style="font-size: 16px; line-height: 2;">
+                <div>Nhà cung cấp: <strong class="text-primary">{{ $sach->nha_cung_cap}}</strong></div>
+                <div>Nhà xuất bản: <strong class="text-primary">{{ $sach->nha_xuat_ban}}</strong></div>
+                <div>Tác giả: <strong class="text-primary">{{ $sach->tac_gia}}</strong></div>
+                <div>Hình thức bìa: <strong class="text-primary">{{ $sach->hinh_thuc_bia}}</strong></div>
+                <div class='mt-1'>
+                Số lượng mua:
+                <input type='number' id='product-number' size='5' min="1" value="1">
+                <button class='btn btn-success btn-sm mb-1' id='add-to-cart'>Thêm vào giỏ hàng</button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="col-7">
-        <p>Nhà cung cấp: <b>Hải Đăng</b></p>
-        <p>Nhà xuất bản: <b>NXB Văn Học</b></p>
-        <p>Tác giả: <b>{{ $sach->tac_gia ?? 'Đang cập nhật' }}</b></p>
-        <p>Hình thức bìa: <b>{{ $sach->hinh_thuc_bia ?? 'Đang cập nhật' }}</b></p>
-        <p>Giá bán: <span class="text-danger"><b>{{ number_format($sach->gia_ban, 0, ",", ".") }}đ</b></span></p>
-                
+    <div class="row mt-4">
+        <div class="col-12">
+            <h5 class="font-weight-bold" style="border-bottom: 2px solid #eee; padding-bottom: 10px;">Mô tả:</h5>
+            <div class="description-text mt-2" style="text-align: justify; line-height: 1.6; color: #333;">
+                {{ $sach->mo_ta }}
+                </div>
+        </div>
     </div>
 </div>
-<h5 style="padding: 0 20px;">Mô tả: </h5>
-    <p 
-     style="text-align: justify; font-family: Arial, sans-serif; padding: 0 20px;">{{ $sach->mo_ta }}</p>
 
+<style>
+    .info-detail strong {
+        color: #000;
+        margin-left: 5px;
+    }
+    .description-text {
+        font-size: 15px;
+        white-space: pre-line; /* Giữ lại các khoảng xuống dòng từ database */
+    }
+</style>
 </x-book-layout>
