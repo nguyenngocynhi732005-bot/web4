@@ -19,6 +19,35 @@
         <p>Tác giả: <b>{{ $sach->tac_gia ?? 'Đang cập nhật' }}</b></p>
         <p>Hình thức bìa: <b>{{ $sach->hinh_thuc_bia ?? 'Đang cập nhật' }}</b></p>
         <p>Giá bán: <span class="text-danger"><b>{{ number_format($sach->gia_ban, 0, ",", ".") }}đ</b></span></p>
+        <div class='mt-1'>
+        Số lượng mua:
+        <input type='number' id='product-number' size='5' min="1" value="1">
+        <button class='btn btn-success btn-sm mb-1' id='add-to-cart'>Thêm vào giỏ hàng</button>
+        </div>
+
+<script>
+        $(document).ready(function(){
+        $("#add-to-cart").click(function(){
+        id = "{{$data->id}}";
+        num = $("#product-number").val()
+        $.ajax({
+        type:"POST",
+        dataType:"json",
+        url: "{{route('cartadd')}}",
+        data:{"_token": "{{ csrf_token() }}","id":id,"num":num},
+        beforeSend:function(){
+        },
+        success:function(data){
+        $("#cart-number-product").html(data);
+        },
+        error: function (xhr,status,error){
+        },
+        complete: function(xhr,status){
+        }
+        });
+        });
+        });
+</script>   
                 
     </div>
 </div>
