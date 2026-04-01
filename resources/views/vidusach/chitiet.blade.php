@@ -7,10 +7,9 @@
 
     <div class="row">
         <div class="col-md-5">
-            @php
-                // Logic xử lý tên file ảnh giống như bạn đã làm ở trang danh sách
-                $ten_file = str_replace('image/', 'image/sach_', $sach->file_anh_bia);
-            @endphp
+            
+                <img src="{{ asset($sach->link_anh_bia) }}" width="100%" height="200px">
+            
         </div>
         <div class="col-md-7">
             <div class="info-detail" style="font-size: 16px; line-height: 2;">
@@ -18,6 +17,8 @@
                 <div>Nhà xuất bản: <strong class="text-primary">{{ $sach->nha_xuat_ban}}</strong></div>
                 <div>Tác giả: <strong class="text-primary">{{ $sach->tac_gia}}</strong></div>
                 <div>Hình thức bìa: <strong class="text-primary">{{ $sach->hinh_thuc_bia}}</strong></div>
+                <p>Giá bán: <span class="text-danger"><b>{{ number_format($sach->gia_ban, 0, ",", ".") }}đ</b></span></p>
+
                 <div class='mt-1'>
                 Số lượng mua:
                 <input type='number' id='product-number' size='5' min="1" value="1">
@@ -36,18 +37,7 @@
                 </div>
         </div>
 
-    <div class="col-7">
-        <p>Nhà cung cấp: <b>Hải Đăng</b></p>
-        <p>Nhà xuất bản: <b>NXB Văn Học</b></p>
-        <p>Tác giả: <b>{{ $sach->tac_gia ?? 'Đang cập nhật' }}</b></p>
-        <p>Hình thức bìa: <b>{{ $sach->hinh_thuc_bia ?? 'Đang cập nhật' }}</b></p>
-        <p>Giá bán: <span class="text-danger"><b>{{ number_format($sach->gia_ban, 0, ",", ".") }}đ</b></span></p>
-        <div class='mt-1'>
-        Số lượng mua:
-        <input type='number' id='product-number' size='5' min="1" value="1">
-        <button class='btn btn-success btn-sm mb-1' id='add-to-cart'>Thêm vào giỏ hàng</button>
-        </div>
-
+   
 <script>
         $(document).ready(function(){
         $("#add-to-cart").click(function(){
