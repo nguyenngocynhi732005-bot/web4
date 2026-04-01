@@ -16,11 +16,12 @@ use App\Http\Controllers\ViduController;
 |
 */
 
-
+Route::get('/', [ViduLayoutController::class, 'sach']);
 Route::get('/trang1', [ViduLayoutController::class, 'trang1']);
 Route::get('/sach', [ViduLayoutController::class, 'sach']);
 Route::get('/sach/theloai/{id}', [ViduLayoutController::class, 'theloai']);
-Route::get('/sach/chitiet/{id}', [ViduLayoutController::class, 'chitiet'])->name('sach.chitiet');
+Route::get('/sach/chitiet/{id}', 'App\\Http\\Controllers\\ViduLayoutController@chiTiet')->name('sach.chitiet');
+Route::get('/quanlysach/xoa/{id}', [ViduLayoutController::class, 'xoasach'])->name('xoasach');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -28,9 +29,8 @@ Route::get('/dashboard', function () {
 
 require __DIR__ . '/auth.php';
 
-Route::get('/', [ViduLayoutController::class, 'sach']);
 Route::get('/accountpanel', 'App\Http\Controllers\AccountController@accountpanel')
-    ->middleware('auth')->name("account");
+    ->middleware('auth')->name('account');
 Route::post('/saveaccountinfo', 'App\Http\Controllers\AccountController@saveaccountinfo')
     ->middleware('auth')->name('saveinfo');
 
@@ -44,9 +44,6 @@ Route::get('/quanlysach/edit/{id}', [BookController::class, 'edit'])->name('book
 
 // Xử lý xóa sách
 Route::post('/quanlysach/delete', [BookController::class, 'bookdelete'])->name('bookdelete');
-
-// Route Xóa sách (Ví dụ dùng phương thức GET để đơn giản cho bài thực hành)
-Route::get('/quanlysach/xoa/{id}', [ViduLayoutController::class, 'xoasach'])->name('xoasach');
 
 Route::get('/order', [BookController::class, 'order'])->name('order');
 Route::post('/cart/add', [BookController::class, 'cartadd'])->name('cartadd');

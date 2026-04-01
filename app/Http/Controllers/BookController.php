@@ -156,6 +156,7 @@ class BookController extends Controller
         return view("vidusach.bookview", compact("data"));
     }
 
+<<<<<<< HEAD
     public function index()
     {
         $data = DB::table('sach')->get();
@@ -181,3 +182,26 @@ class BookController extends Controller
         return redirect()->back()->with('status', 'Đã xóa sách thành công!');
     }
 }
+=======
+    public function index() {
+        $data = DB::table('sach')->get(); 
+        return view('vidusach.book_list', compact('data')); 
+    }
+
+    public function create() {
+        return view('vidusach.book_create'); // Em sẽ tạo file này sau
+    }
+
+    public function edit($id) {
+        $book = DB::table('sach')->where('id', $id)->first();
+        return view('vidusach.book_edit', compact('book'));
+    }
+
+    public function bookdelete(Request $request) {
+        $id = $request->id;
+        DB::table('sach')->where('id', $id)->delete();
+        
+        return redirect()->back()->with('status', 'Đã xóa sách thành công!');
+    }
+}
+>>>>>>> 9dcb7206e83fa4214892ccea9c2687aa3e8b0fbb
