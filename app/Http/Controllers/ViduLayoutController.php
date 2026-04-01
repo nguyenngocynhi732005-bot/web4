@@ -37,7 +37,7 @@ class ViduLayoutController extends Controller
 
     if(count($data) > 0) {
         $sach = $data[0];
-        return view('vidusach.chitiet', compact('sach'));
+        return view('vidusach.chitiet', compact('sach','data'));
     } else {
         return redirect()->route('vidusach.index')->with('error', 'Không tìm thấy sách');
     }

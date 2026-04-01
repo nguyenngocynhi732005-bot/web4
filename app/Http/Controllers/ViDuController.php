@@ -1,31 +1,35 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers; 
 
 use Illuminate\Http\Request;
+use App\Models\User; 
+use App\Notifications\TestSendEmail; 
+use Illuminate\Support\Facades\Notification; 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
-class ViDuController extends Controller
+class ViduController extends Controller
 {
-public function vidu1(){
-    return view('vidu1');
-}
+function testemail() 
+{
+    $user = Auth::user();
     
-function tinhtong(Request $request)
-{
-$so_a = $request->input("so_a");
-$so_b = $request->input("so_b");
-$ket_qua = $so_a+$so_b;
-return "Kết quả là: ".$ket_qua;
-}
+    // Lấy đơn hàng mới nhất của user này
+    $latestOrder = DB::table('don_hang')
+                     ->where('user_id', $user->id)
+                     ->orderBy('id', 'desc')
+                     ->first();
 
-function thuhientai(){
-    $thu = date('l');
-    return "Today is $thu";
-}
+    if ($latestOrder) {
+        $donHang = DB::select("select * from chi_tiet_don_hang c, sach s 
+                               where c.sach_id = s.id 
+                               and c.ma_don_hang = ?", [$latestOrder->id]);
 
-function hubview(){
-    $data ="DHNH";
-    $data2 ="DHNH";
-    return view('vidu1',compact("data"));
+        Notification::send($user, new TestSendEmail($donHang));
+        return "Đã gửi mail đơn hàng mới nhất (ID: $latestOrder->id)";
+    }
+    
+    return "User này chưa có đơn hàng nào.";
 }
 }
