@@ -69,6 +69,24 @@
             align-items: center;
             justify-content: center;
         }
+
+        .main-content {
+            max-width: 1000px;
+            /* Bằng với chiều rộng của banner và navbar */
+            margin: 0 auto;
+            /* auto ở hai bên sẽ giúp căn giữa */
+            padding: 20px 0;
+            /* Khoảng cách đệm để không dính sát mép màn hình trên mobile */
+        }
+
+        /* Cập nhật lại list-book để hiển thị đẹp hơn */
+        .list-book {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            justify-items: center;
+            /* Căn giữa các item bên trong grid */
+        }
     </style>
 </head>
 
@@ -133,17 +151,8 @@
         </nav>
     </header>
 
-    <main style="width:1000px; margin:2px auto;">
-        <div class='row no-gutters mt-3'>
-            <div class='col-3 pr-3'>
-                <img src="{{ asset('hinh/sidebar_1.jpg') }}" class="sidebar-img shadow-sm">
-                <img src="{{ asset('hinh/sidebar_2.jpg') }}" class="sidebar-img shadow-sm">
-            </div>
-
-            <div class='col-9'>
-                {{$slot}}
-            </div>
-        </div>
+    <main class="main-content">
+        {{$slot}}
     </main>
 </body>
 
