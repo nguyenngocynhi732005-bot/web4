@@ -1,11 +1,5 @@
 <x-book-layout>
-    <x-slot name="title">
-        Nhà Sách Phương Nam
-    </x-slot>
-
-    <h5 class="mt-3 text-uppercase font-weight-bold" style="color: #555;">Sách mới nhất</h5>
-    <hr>
-
+   
     <div class='list-book'>
         @foreach($data as $row)
         <div class='book'>
@@ -23,11 +17,9 @@
         </div>
         @endforeach
     </div>
-<<<<<<< HEAD
-</x-book-layout>
-=======
-    @endforeach
-</div>
+
 </x-book-layout>
 
->>>>>>> remotes/origin/QuynhAnh
+
+
+

@@ -27,7 +27,7 @@
         </div>
     </div>
 
-<<<<<<< HEAD
+
     <div class="row mt-4">
         <div class="col-12">
             <h5 class="font-weight-bold" style="border-bottom: 2px solid #eee; padding-bottom: 10px;">Mô tả:</h5>
@@ -35,7 +35,7 @@
                 {{ $sach->mo_ta }}
                 </div>
         </div>
-=======
+
     <div class="col-7">
         <p>Nhà cung cấp: <b>Hải Đăng</b></p>
         <p>Nhà xuất bản: <b>NXB Văn Học</b></p>
@@ -51,7 +51,7 @@
 <script>
         $(document).ready(function(){
         $("#add-to-cart").click(function(){
-        id = "{{$data->id}}";
+    id = "{{$sach->id}}";
         num = $("#product-number").val()
         $.ajax({
         type:"POST",
@@ -72,7 +72,7 @@
         });
 </script>   
                 
->>>>>>> remotes/origin/QuynhAnh
+
     </div>
 </div>
 

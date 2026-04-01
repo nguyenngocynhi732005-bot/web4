@@ -16,7 +16,7 @@
 
 <body>
     <header style='text-align:center'>
-        <img src="{{asset('hinh/banner_sach.jpg')}}" width="1000px">
+        <img src="{{asset('anh/banner_sach.jpg')}}" width="1000px">
     </header>
 
     <main style="width: 1000px; margin: 2px auto;">
@@ -55,8 +55,8 @@
                         @endauth
                     </ul>
                 </nav>
-                <img src="{{asset('hinh/sidebar_1.jpg')}}" width="100%" class='mt-1 shadow-sm'>
-                <img src="{{asset('hinh/sidebar_2.jpg')}}" width="100%" class='mt-1 shadow-sm'>
+                <img src="{{asset('anh/sidebar_1.jpg')}}" width="100%" class='mt-1 shadow-sm'>
+                <img src="{{asset('anh/sidebar_2.jpg')}}" width="100%" class='mt-1 shadow-sm'>
             </div>
 
             <div class='col-9 pl-4'>
