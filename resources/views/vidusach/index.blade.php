@@ -1,20 +1,26 @@
 <x-book-layout>
     <x-slot name="title">
-        Sách
+        Nhà Sách Phương Nam
     </x-slot>
-    
-<div class='list-book'>
-    @foreach($data as $row)
-    <div class='book'>
-        
-        <img src="{{$row->link_anh_bia }}" width='200px' height='200px'>
-        <br>
-        <a href="{{ url('sach/chitiet/' . $row->id) }}">
-        <b>{{ $row->tieu_de }}</b>
-    </a>
-        <br/>
-        <i>{{ number_format($row->gia_ban, 0, ",", ".") }}đ</i>
+
+    <h5 class="mt-3 text-uppercase font-weight-bold" style="color: #555;">Sách mới nhất</h5>
+    <hr>
+
+    <div class='list-book'>
+        @foreach($data as $row)
+        <div class='book'>
+            <a href="{{ url('sach/chitiet/' . $row->id) }}">
+                <img src="{{ asset($row->link_anh_bia) }}" width="100%" height="200px">
+            </a>
+            <div class="mt-2">
+                <b style="font-size: 14px; display: block; height: 40px; overflow: hidden;">
+                    {{ $row->tieu_de }}
+                </b>
+                <i style="color: #ff5850; font-weight: bold;">
+                    {{ number_format($row->gia_ban, 0, ",", ".") }}đ
+                </i>
+            </div>
+        </div>
+        @endforeach
     </div>
-    @endforeach
-</div>
 </x-book-layout>

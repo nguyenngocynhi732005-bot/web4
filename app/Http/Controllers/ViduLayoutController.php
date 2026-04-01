@@ -1,42 +1,46 @@
-<?php 
+<?php
 
+namespace App\Http\Controllers;
 
-namespace App\Http\Controllers; // Khai báo vị trí của file này
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB; // Dòng này để sửa lỗi "Undefined type DB"
-
-use App\Http\Controllers\Controller; // "Nhập" lớp Controller gốc vào để sử dụng
+use Illuminate\Support\Facades\DB;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Routing\Controller as BaseController;
 
 class ViduLayoutController extends Controller
 {
-function trang1()
-{
-return view("vidulayout.trang1");
-}
-
-function sach()
-{
-$data = DB::select("select * from sach order by gia_ban asc limit 0,8");
-return view("vidusach.index", compact("data"));
-}
-function theloai($id)
-{
-$data = DB::select("select * from sach where the_loai = ?",[$id]);
-return view("vidusach.index", compact("data"));
-}
-// Thêm vào trong class ViduLayoutController
-function chitiet($id)
-{
-    // Lấy một dòng dữ liệu duy nhất từ bảng sach theo id
-    $book = DB::select("select * from sach where id = ?", [$id]);
-    
-    // Nếu tìm thấy sách, trả về view chi tiết và truyền biến $book[0] sang
-    if (!empty($book)) {
-        return view("vidusach.chitiet", ['sach' => $book[0]]);
+    function trang1()
+    {
+        return view("vidulayout.trang1");
     }
-    return redirect('/sach'); // Nếu không thấy thì quay về trang chủ
-}
-}
-?>
 
+    function sach()
+    {
+        // Truy vấn 8 cuốn sách có giá bán thấp nhất
+        $data = DB::select("select * from sach order by gia_ban asc limit 0,8");
+        // Trả về view index và truyền biến data sang
+        return view("vidusach.index", compact("data"));
+    }
+
+    // Hàm hiển thị sách theo thể loại
+    function theloai($id)
+    {
+        // Truy vấn sách dựa trên ID thể loại được truyền từ URL
+        $data = DB::select("select * from sach where the_loai = ?", [$id]);
+        return view("vidusach.index", compact("data"));
+    }
+    public function chiTiet($id)
+{
+    // Lấy thông tin cuốn sách theo ID
+    $data = DB::select("select * from sach where id = ?", [$id]);
+
+    if(count($data) > 0) {
+        $sach = $data[0];
+        return view('vidusach.chitiet', compact('sach'));
+    } else {
+        return redirect()->route('vidusach.index')->with('error', 'Không tìm thấy sách');
+    }
+}
+    
+}
