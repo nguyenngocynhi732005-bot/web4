@@ -23,4 +23,11 @@
         </div>
         @endforeach
     </div>
+<<<<<<< HEAD
 </x-book-layout>
+=======
+    @endforeach
+</div>
+</x-book-layout>
+
+>>>>>>> remotes/origin/QuynhAnh
